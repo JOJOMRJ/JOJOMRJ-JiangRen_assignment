@@ -1,0 +1,169 @@
+
+$card-font-family:'Roboto', sans-serif;
+$card-background-gradient-primary:linear-gradient(-45deg,rgba(106, 17, 203, 0.8), rgba(37, 117, 252, 0.8));
+$card-background-gradient-secondary:linear-gradient(-45deg, rgba(0, 123, 255, 0.8), rgba(0, 230, 118, 0.8));
+$box-shadow-primary: 0px 10px 25px rgba(0, 0, 0, 0.2);
+/* 基础重置 */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 移除列表默认样式 */
+ul, ol {
+    list-style: none;
+}
+
+/* 移除链接的默认样式 */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* 重置按钮样式 */
+button {
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+@mixin card-primary ($background-gradient, $background-image) {
+  max-width: 30rem;
+  padding: 3rem 2rem;
+  margin: 1rem;
+  border-radius: 0.5rem;
+  background-image: $background-gradient, $background-image;
+  background-size: cover;
+  background-position: center;
+  color: white;
+  font-family: $card-font-family;
+  
+  h2 {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  p {
+    font-size: 0.8rem;
+    line-height: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  button {
+    padding: 15px 30px;
+    background: transparent;
+    color: inherit;
+    border: 1px solid #fff;
+    border-radius: 5px;
+  }
+}
+
+@mixin card-secondary (
+  $background-gradient:none,
+  $background-image:"",
+  $color,
+  $p-color,
+  $span-color) {
+  max-width: 30rem;
+  padding: 3rem 2rem;
+  border-radius: 0.5rem;
+  background-image: $background-gradient, $background-image;
+  background-size: cover;
+  background-position: center;
+  color: $color;
+  font-family: $card-font-family;
+  border:1px solid black;
+  
+  .user {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    .user-img{
+      margin-right: 0.5rem;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: #fff;
+    }
+    .user-detail {
+      flex:1;
+      .user-name {
+        font-size: 1rem;
+      }  
+      .user-company {
+        margin-top: 0.4rem;
+        span {
+          color:$span-color;
+        }
+      }
+    }
+    .user-rate{
+      align-self: flex-start;
+      color:gold;
+      font-size: 1rem;
+    }
+  }
+
+  p {
+    font-size: 0.8rem;
+    line-height: 1.5rem;
+    color:$p-color
+  }
+}
+
+@mixin card-hover {
+  box-shadow: $box-shadow-primary;
+  transform: translateY(-3px);
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card-1 {
+  @include card-primary($card-background-gradient-primary,url('background-image.jpg'));
+  transition: all 0.1s ease;
+  &:hover {
+    @include card-hover
+  }
+}
+
+.card-2 {
+  @include card-primary($card-background-gradient-secondary, url('background-image.jpg'));
+  transition: all 0.1s ease;
+  &:hover {
+    @include card-hover
+  }
+}
+
+.card-3 {
+  @include card-secondary(
+    $color:black,
+    $p-color:gray,
+    $span-color:blue
+  );
+  transition: all 0.1s ease;
+  &:hover {
+    @include card-hover
+  }
+}
+
+.card-4 {
+  @include card-secondary(
+    $background-gradient:$card-background-gradient-primary,
+    $background-image:"",
+    $color:white,
+    $p-color:white,
+    $span-color:white
+  );
+  transition: all 0.1s ease;
+  &:hover {
+    @include card-hover
+  }
+}
